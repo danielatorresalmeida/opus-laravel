@@ -90,6 +90,7 @@
                 @endauth
 
                 @guest
+                @unless(config('opus.read_only'))
 
                     @if(Route::has('login'))
                         <a href="{{ route('login') }}">
@@ -104,6 +105,7 @@
                         </a>
                     @endif
 
+                @endunless
                 @endguest
 
             </div>
@@ -111,6 +113,12 @@
     </header>
 
     <main class="container main" id="main">
+
+        @if(config('opus.read_only'))
+            <div class="alert" role="status">
+                Demonstração pública do OPUS: consulta disponível; registo e alterações desativados.
+            </div>
+        @endif
 
         @if(session('success'))
             <div class="alert" role="status">
