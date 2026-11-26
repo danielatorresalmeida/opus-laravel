@@ -67,3 +67,7 @@ Route::middleware(['auth', 'can:manage-system'])->group(function () {
     Route::delete('/compositions/{composition}', [CompositionController::class, 'destroy'])
         ->whereNumber('composition')->name('compositions.destroy');
 });
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
